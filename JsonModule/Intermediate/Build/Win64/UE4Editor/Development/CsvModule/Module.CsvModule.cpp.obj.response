@@ -24,11 +24,11 @@
 /wd4838
 /w44668
 /I "E:\Epic Games\UE_4.19\Engine\Source"
-/I F:\UE4_File\MyPackageProject\Plugins\JsonModule\Source\CsvModule\Private
-/I F:\UE4_File\MyPackageProject\Plugins\JsonModule\Source
-/I F:\UE4_File\MyPackageProject\Plugins\JsonModule\Source\CsvModule\Public
-/I F:\UE4_File\MyPackageProject\Plugins\JsonModule\Intermediate\Build\Win64\UE4Editor\Inc\CsvModule
-/I F:\UE4_File\MyPackageProject\Plugins\JsonModule\Source\CsvModule
+/I F:\UE4_File\BNUVO\Plugins\JsonModule\Source\CsvModule\Private
+/I F:\UE4_File\BNUVO\Plugins\JsonModule\Source
+/I F:\UE4_File\BNUVO\Plugins\JsonModule\Source\CsvModule\Public
+/I F:\UE4_File\BNUVO\Plugins\JsonModule\Intermediate\Build\Win64\UE4Editor\Inc\CsvModule
+/I F:\UE4_File\BNUVO\Plugins\JsonModule\Source\CsvModule
 /I "E:\Epic Games\UE_4.19\Engine\Source\Runtime\Core\Public"
 /I "E:\Epic Games\UE_4.19\Engine\Source\Runtime\Core\Public\Internationalization"
 /I "E:\Epic Games\UE_4.19\Engine\Source\Runtime\Core\Public\Async"
@@ -366,9 +366,9 @@
 /FI"E:\Epic Games\UE_4.19\Engine\Intermediate\Build\Win64\UE4Editor\Development\Engine\SharedPCH.Engine.h"
 /Yu"E:\Epic Games\UE_4.19\Engine\Intermediate\Build\Win64\UE4Editor\Development\Engine\SharedPCH.Engine.h"
 /Fp"E:\Epic Games\UE_4.19\Engine\Intermediate\Build\Win64\UE4Editor\Development\Engine\SharedPCH.Engine.h.pch"
-"F:\UE4_File\MyPackageProject\Plugins\JsonModule\Intermediate\Build\Win64\UE4Editor\Development\CsvModule\Module.CsvModule.cpp"
-/FI"F:\UE4_File\MyPackageProject\Plugins\JsonModule\Intermediate\Build\Win64\UE4Editor\Development\CsvModule\Definitions.CsvModule.h"
-/Fo"F:\UE4_File\MyPackageProject\Plugins\JsonModule\Intermediate\Build\Win64\UE4Editor\Development\CsvModule\Module.CsvModule.cpp.obj"
+"F:\UE4_File\BNUVO\Plugins\JsonModule\Intermediate\Build\Win64\UE4Editor\Development\CsvModule\Module.CsvModule.cpp"
+/FI"F:\UE4_File\BNUVO\Plugins\JsonModule\Intermediate\Build\Win64\UE4Editor\Development\CsvModule\Definitions.CsvModule.h"
+/Fo"F:\UE4_File\BNUVO\Plugins\JsonModule\Intermediate\Build\Win64\UE4Editor\Development\CsvModule\Module.CsvModule.cpp.obj"
 /TP
 /GR-
 /W4

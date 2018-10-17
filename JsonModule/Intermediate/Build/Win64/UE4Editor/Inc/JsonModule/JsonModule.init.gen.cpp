@@ -19,8 +19,8 @@ void EmptyLinkFunctionForGeneratedCodeJsonModule_init() {}
 			static const UE4CodeGen_Private::FPackageParams PackageParams = {
 				"/Script/JsonModule",
 				PKG_CompiledIn | 0x00000000,
-				0x03E338F5,
-				0x69762299,
+				0x22B53D4A,
+				0x5F43165A,
 				nullptr, 0,
 				METADATA_PARAMS(nullptr, 0)
 			};

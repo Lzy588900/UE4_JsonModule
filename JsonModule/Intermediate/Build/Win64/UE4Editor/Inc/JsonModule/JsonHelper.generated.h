@@ -15,12 +15,12 @@ enum class EJsonType : uint8;
 #endif
 #define JSONMODULE_JsonHelper_generated_h
 
-#define MyPackageProject_Plugins_JsonModule_Source_JsonModule_Public_JsonHelper_h_25_GENERATED_BODY \
+#define BNUVO_Plugins_JsonModule_Source_JsonModule_Public_JsonHelper_h_25_GENERATED_BODY \
 	friend JSONMODULE_API class UScriptStruct* Z_Construct_UScriptStruct_FJsonStruct(); \
 	JSONMODULE_API static class UScriptStruct* StaticStruct();
 
 
-#define MyPackageProject_Plugins_JsonModule_Source_JsonModule_Public_JsonHelper_h_34_RPC_WRAPPERS \
+#define BNUVO_Plugins_JsonModule_Source_JsonModule_Public_JsonHelper_h_34_RPC_WRAPPERS \
  \
 	DECLARE_FUNCTION(execCreateJsonArrayValueByArray) \
 	{ \
@@ -219,6 +219,19 @@ enum class EJsonType : uint8;
 		P_NATIVE_END; \
 	} \
  \
+	DECLARE_FUNCTION(execFindJsonFromObject) \
+	{ \
+		P_GET_STRUCT(FJsonStruct,Z_Param_json); \
+		P_GET_PROPERTY(UStrProperty,Z_Param_key); \
+		P_GET_PROPERTY(UStrProperty,Z_Param_value); \
+		P_GET_ENUM(EJsonType,Z_Param_type); \
+		P_GET_UBOOL_REF(Z_Param_Out_isFound); \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		*(FJsonStruct*)Z_Param__Result=UJsonHelper::FindJsonFromObject(Z_Param_json,Z_Param_key,Z_Param_value,EJsonType(Z_Param_type),Z_Param_Out_isFound); \
+		P_NATIVE_END; \
+	} \
+ \
 	DECLARE_FUNCTION(execGetAllValueFromJson) \
 	{ \
 		P_GET_STRUCT(FJsonStruct,Z_Param_json); \
@@ -265,7 +278,7 @@ enum class EJsonType : uint8;
 	}
 
 
-#define MyPackageProject_Plugins_JsonModule_Source_JsonModule_Public_JsonHelper_h_34_RPC_WRAPPERS_NO_PURE_DECLS \
+#define BNUVO_Plugins_JsonModule_Source_JsonModule_Public_JsonHelper_h_34_RPC_WRAPPERS_NO_PURE_DECLS \
  \
 	DECLARE_FUNCTION(execCreateJsonArrayValueByArray) \
 	{ \
@@ -464,6 +477,19 @@ enum class EJsonType : uint8;
 		P_NATIVE_END; \
 	} \
  \
+	DECLARE_FUNCTION(execFindJsonFromObject) \
+	{ \
+		P_GET_STRUCT(FJsonStruct,Z_Param_json); \
+		P_GET_PROPERTY(UStrProperty,Z_Param_key); \
+		P_GET_PROPERTY(UStrProperty,Z_Param_value); \
+		P_GET_ENUM(EJsonType,Z_Param_type); \
+		P_GET_UBOOL_REF(Z_Param_Out_isFound); \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		*(FJsonStruct*)Z_Param__Result=UJsonHelper::FindJsonFromObject(Z_Param_json,Z_Param_key,Z_Param_value,EJsonType(Z_Param_type),Z_Param_Out_isFound); \
+		P_NATIVE_END; \
+	} \
+ \
 	DECLARE_FUNCTION(execGetAllValueFromJson) \
 	{ \
 		P_GET_STRUCT(FJsonStruct,Z_Param_json); \
@@ -510,7 +536,7 @@ enum class EJsonType : uint8;
 	}
 
 
-#define MyPackageProject_Plugins_JsonModule_Source_JsonModule_Public_JsonHelper_h_34_INCLASS_NO_PURE_DECLS \
+#define BNUVO_Plugins_JsonModule_Source_JsonModule_Public_JsonHelper_h_34_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesUJsonHelper(); \
 	friend JSONMODULE_API class UClass* Z_Construct_UClass_UJsonHelper(); \
@@ -520,7 +546,7 @@ public: \
 	enum {IsIntrinsic=COMPILED_IN_INTRINSIC};
 
 
-#define MyPackageProject_Plugins_JsonModule_Source_JsonModule_Public_JsonHelper_h_34_INCLASS \
+#define BNUVO_Plugins_JsonModule_Source_JsonModule_Public_JsonHelper_h_34_INCLASS \
 private: \
 	static void StaticRegisterNativesUJsonHelper(); \
 	friend JSONMODULE_API class UClass* Z_Construct_UClass_UJsonHelper(); \
@@ -530,7 +556,7 @@ public: \
 	enum {IsIntrinsic=COMPILED_IN_INTRINSIC};
 
 
-#define MyPackageProject_Plugins_JsonModule_Source_JsonModule_Public_JsonHelper_h_34_STANDARD_CONSTRUCTORS \
+#define BNUVO_Plugins_JsonModule_Source_JsonModule_Public_JsonHelper_h_34_STANDARD_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API UJsonHelper(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(UJsonHelper) \
@@ -543,7 +569,7 @@ private: \
 public:
 
 
-#define MyPackageProject_Plugins_JsonModule_Source_JsonModule_Public_JsonHelper_h_34_ENHANCED_CONSTRUCTORS \
+#define BNUVO_Plugins_JsonModule_Source_JsonModule_Public_JsonHelper_h_34_ENHANCED_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API UJsonHelper(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()) : Super(ObjectInitializer) { }; \
 private: \
@@ -556,32 +582,32 @@ DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(UJsonHelper); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(UJsonHelper)
 
 
-#define MyPackageProject_Plugins_JsonModule_Source_JsonModule_Public_JsonHelper_h_34_PRIVATE_PROPERTY_OFFSET
-#define MyPackageProject_Plugins_JsonModule_Source_JsonModule_Public_JsonHelper_h_31_PROLOG
-#define MyPackageProject_Plugins_JsonModule_Source_JsonModule_Public_JsonHelper_h_34_GENERATED_BODY_LEGACY \
+#define BNUVO_Plugins_JsonModule_Source_JsonModule_Public_JsonHelper_h_34_PRIVATE_PROPERTY_OFFSET
+#define BNUVO_Plugins_JsonModule_Source_JsonModule_Public_JsonHelper_h_31_PROLOG
+#define BNUVO_Plugins_JsonModule_Source_JsonModule_Public_JsonHelper_h_34_GENERATED_BODY_LEGACY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	MyPackageProject_Plugins_JsonModule_Source_JsonModule_Public_JsonHelper_h_34_PRIVATE_PROPERTY_OFFSET \
-	MyPackageProject_Plugins_JsonModule_Source_JsonModule_Public_JsonHelper_h_34_RPC_WRAPPERS \
-	MyPackageProject_Plugins_JsonModule_Source_JsonModule_Public_JsonHelper_h_34_INCLASS \
-	MyPackageProject_Plugins_JsonModule_Source_JsonModule_Public_JsonHelper_h_34_STANDARD_CONSTRUCTORS \
+	BNUVO_Plugins_JsonModule_Source_JsonModule_Public_JsonHelper_h_34_PRIVATE_PROPERTY_OFFSET \
+	BNUVO_Plugins_JsonModule_Source_JsonModule_Public_JsonHelper_h_34_RPC_WRAPPERS \
+	BNUVO_Plugins_JsonModule_Source_JsonModule_Public_JsonHelper_h_34_INCLASS \
+	BNUVO_Plugins_JsonModule_Source_JsonModule_Public_JsonHelper_h_34_STANDARD_CONSTRUCTORS \
 public: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
-#define MyPackageProject_Plugins_JsonModule_Source_JsonModule_Public_JsonHelper_h_34_GENERATED_BODY \
+#define BNUVO_Plugins_JsonModule_Source_JsonModule_Public_JsonHelper_h_34_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	MyPackageProject_Plugins_JsonModule_Source_JsonModule_Public_JsonHelper_h_34_PRIVATE_PROPERTY_OFFSET \
-	MyPackageProject_Plugins_JsonModule_Source_JsonModule_Public_JsonHelper_h_34_RPC_WRAPPERS_NO_PURE_DECLS \
-	MyPackageProject_Plugins_JsonModule_Source_JsonModule_Public_JsonHelper_h_34_INCLASS_NO_PURE_DECLS \
-	MyPackageProject_Plugins_JsonModule_Source_JsonModule_Public_JsonHelper_h_34_ENHANCED_CONSTRUCTORS \
+	BNUVO_Plugins_JsonModule_Source_JsonModule_Public_JsonHelper_h_34_PRIVATE_PROPERTY_OFFSET \
+	BNUVO_Plugins_JsonModule_Source_JsonModule_Public_JsonHelper_h_34_RPC_WRAPPERS_NO_PURE_DECLS \
+	BNUVO_Plugins_JsonModule_Source_JsonModule_Public_JsonHelper_h_34_INCLASS_NO_PURE_DECLS \
+	BNUVO_Plugins_JsonModule_Source_JsonModule_Public_JsonHelper_h_34_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
 #undef CURRENT_FILE_ID
-#define CURRENT_FILE_ID MyPackageProject_Plugins_JsonModule_Source_JsonModule_Public_JsonHelper_h
+#define CURRENT_FILE_ID BNUVO_Plugins_JsonModule_Source_JsonModule_Public_JsonHelper_h
 
 
 #define FOREACH_ENUM_EJSONTYPE(op) \

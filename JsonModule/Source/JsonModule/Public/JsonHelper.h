@@ -48,7 +48,10 @@ class JSONMODULE_API UJsonHelper : public UBlueprintFunctionLibrary
 	/*获取JSON类型为Object和Array中的所有value*/
 	UFUNCTION(BlueprintPure, Category = "Json")
 	static TArray<FJsonStruct> GetAllValueFromJson(FJsonStruct json);
-
+	/*查找Json类型为Object中的特定Value*/
+	UFUNCTION(BlueprintPure, meta = (DisplayName = "Find"), Category = "Json")
+		static FJsonStruct FindJsonFromObject(FJsonStruct json, FString key, FString value, EJsonType type,bool& isFound);
+		static bool FindJsonFromObject_C(TSharedPtr<FJsonValue> json, FString key,FString value, EJson type, TSharedPtr<FJsonValue>& result);
 	/*设置Json Key值*/
 	UFUNCTION(BlueprintPure, Category = "Json")
 		static FJsonStruct SetJsonKey(FJsonStruct json,FString key);
