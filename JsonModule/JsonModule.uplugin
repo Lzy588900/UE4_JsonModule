@@ -13,11 +13,16 @@
 	"CanContainContent": true,
 	"IsBetaVersion": false,
 	"Installed": false,
-	"Modules": [
+  "Modules": [
     {
       "Name": "JsonModule",
       "Type": "Runtime",
       "LoadingPhase": "Default"
+    },
+    {
+      "Name": "CsvModule",
+      "Type": "Runtime",
+      "LoadingPhase": "Default"
     }
-	]
+  ]
 }
