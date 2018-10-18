@@ -89,26 +89,20 @@ class JSONMODULE_API UJsonHelper : public UBlueprintFunctionLibrary
 		static FJsonStruct CreateJsonNumberValue(FString key, float value);
 	UFUNCTION(BlueprintPure, Category = "Json")
 		static FJsonStruct CreateJsonBoolValue(FString key, bool value);
+	/*生成空Object*/
+	UFUNCTION(BlueprintPure, meta = (DisplayName = "CreateEmptyJsonObject"), Category = "Json")
+		static FJsonStruct CreateJsonObject();
 	/*将多个Json合并到一个Object中 返回的Json类型为Object*/
-	UFUNCTION(BlueprintPure, meta = (DisplayName = "CreateJsonObjectValue", CommutativeAssociativeBinaryOperator = "true"), Category = "Json")
-		static FJsonStruct CreateJsonObjectValue(FJsonStruct A, FJsonStruct B);
-	/*将单个Json生成Object 返回的Json类型为Object*/
-	UFUNCTION(BlueprintPure, Category = "Json")
-		static FJsonStruct CreateJsonObjectValueBySingle(FJsonStruct json, FString key);
-	/*将多个Json Object合并生成Object 返回的Json类型为Object*/
-	UFUNCTION(BlueprintPure, meta = (DisplayName = "CreateJsonObjectValueIncludeObject", CommutativeAssociativeBinaryOperator = "true"), Category = "Json")
-		static FJsonStruct CreateJsonObjectValueByObject(FJsonStruct A, FJsonStruct B);
-	static void CreateJsonObjectValue_C(TSharedPtr<FJsonObject> obj, FJsonStruct addItem,bool isAppendObjct=false);
+	UFUNCTION(BlueprintPure, meta = (DisplayName = "CreateJsonObject"), Category = "Json")
+		static FJsonStruct CreateJsonObjectByValue(TArray<FJsonStruct> arrays);
+	static void CreateJsonObjectValue_C(TSharedPtr<FJsonObject> obj, FJsonStruct addItem);
 
+	/*生成空Array*/
+	UFUNCTION(BlueprintPure, meta = (DisplayName = "CreateEmptyJsonArray"), Category = "Json")
+		static FJsonStruct CreateJsonArray();
 	/*将多个Json合并到一个Aray中 返回的Json类型为Aray*/
-	UFUNCTION(BlueprintPure, meta = (DisplayName = "CreateJsonArrayValue", CommutativeAssociativeBinaryOperator = "true"), Category = "Json")
-		static FJsonStruct CreateJsonArrayValue(FJsonStruct A, FJsonStruct B);
-	/*将单个Json生成Aray 返回的Json类型为Aray*/
-	UFUNCTION(BlueprintPure,Category = "Json")
-		static FJsonStruct CreateJsonArrayValueBySingle(FJsonStruct json, FString key);
-	/*将多个Json Aray合并生成Aray 返回的Json类型为Aray*/
-	UFUNCTION(BlueprintPure, meta = (DisplayName = "CreateJsonArrayValueIncludeArray", CommutativeAssociativeBinaryOperator = "true"), Category = "Json")
-		static FJsonStruct CreateJsonArrayValueByArray(FJsonStruct A, FJsonStruct B);
-	static void CreateJsonArrayValue_C(TArray<TSharedPtr<FJsonValue>>& ary, FJsonStruct addItem,bool isAppendArray=true);
+	UFUNCTION(BlueprintPure, meta = (DisplayName = "CreateJsonArray"), Category = "Json")
+		static FJsonStruct CreateJsonArrayByValue(TArray<FJsonStruct> arrays);
+	static void CreateJsonArrayValue_C(TArray<TSharedPtr<FJsonValue>>& ary, FJsonStruct addItem);
 
 };

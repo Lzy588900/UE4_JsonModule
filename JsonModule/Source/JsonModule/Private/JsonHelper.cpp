@@ -273,103 +273,59 @@ FJsonStruct UJsonHelper::CreateJsonBoolValue(FString key, bool value)
 	out.value = Value;
 	return out;
 }
+FJsonStruct UJsonHelper::CreateJsonObject()
+{
+	TArray<FJsonStruct> tem;
+	return CreateJsonObjectByValue(tem);
+}
+FJsonStruct UJsonHelper::CreateJsonObjectByValue(TArray<FJsonStruct> arrays)
+{
+	FJsonStruct out;
+	TSharedPtr<FJsonObject> temObj = MakeShareable(new FJsonObject);
+	TSharedPtr < FJsonValueObject > Value = MakeShareable(new FJsonValueObject(temObj));
+	for (auto tem : arrays) {
+		if (tem.value.IsValid())CreateJsonObjectValue_C(temObj, tem);
+	}
+	out.value = Value;
+	return out;
+}
 
-FJsonStruct UJsonHelper::CreateJsonObjectValue(FJsonStruct A, FJsonStruct B)
-{
-	FJsonStruct out;
-	TSharedPtr<FJsonObject> temObj = MakeShareable(new FJsonObject);
-	TSharedPtr < FJsonValueObject > Value= MakeShareable(new FJsonValueObject(temObj));
-	if (A.value.IsValid())CreateJsonObjectValue_C(temObj, A);
-	if (B.value.IsValid())CreateJsonObjectValue_C(temObj, B);
-	out.value = Value;
-	return out;
-}
-FJsonStruct UJsonHelper::CreateJsonObjectValueBySingle(FJsonStruct json, FString key)
-{
-	FJsonStruct out;
-	TSharedPtr<FJsonObject> temObj = MakeShareable(new FJsonObject);
-	TSharedPtr < FJsonValueObject > Value = MakeShareable(new FJsonValueObject(temObj));
-	if (json.value.IsValid())CreateJsonObjectValue_C(temObj, json);
-	out.value = Value;
-	out.key = key;
-	return out;
-}
-FJsonStruct UJsonHelper::CreateJsonObjectValueByObject(FJsonStruct A, FJsonStruct B)
-{
-	FJsonStruct out;
-	TSharedPtr<FJsonObject> temObj = MakeShareable(new FJsonObject);
-	TSharedPtr < FJsonValueObject > Value = MakeShareable(new FJsonValueObject(temObj));
-	if (A.value.IsValid())CreateJsonObjectValue_C(temObj, A,true);
-	if (B.value.IsValid())CreateJsonObjectValue_C(temObj, B,true);
-	out.value = Value;
-	return out;
-}
-void UJsonHelper::CreateJsonObjectValue_C(TSharedPtr<FJsonObject> obj, FJsonStruct addItem, bool isAppendObjct)
+
+void UJsonHelper::CreateJsonObjectValue_C(TSharedPtr<FJsonObject> obj, FJsonStruct addItem)
 {
 	switch (addItem.value->Type)
 	{
 	case EJson::None:case EJson::Null:break;
-	case EJson::String:case EJson::Number:case EJson::Boolean:case EJson::Array:
+	case EJson::String:case EJson::Number:case EJson::Boolean:case EJson::Array:case EJson::Object:
 		obj->SetField(addItem.key, addItem.value);
-		break;
-	case EJson::Object:
-		if(isAppendObjct)
-			obj->SetField(addItem.key, addItem.value);
-		else
-			for (auto tem : addItem.value->AsObject()->Values) {
-				obj->SetField(tem.Key, tem.Value);
-			}
 		break;
 	}
 }
 
-FJsonStruct UJsonHelper::CreateJsonArrayValue(FJsonStruct A, FJsonStruct B)
+FJsonStruct UJsonHelper::CreateJsonArray()
+{
+	TArray<FJsonStruct> tem;
+	return CreateJsonArrayByValue(tem);
+}
+
+FJsonStruct UJsonHelper::CreateJsonArrayByValue(TArray<FJsonStruct> arrays)
 {
 	FJsonStruct out;
 	TArray<TSharedPtr<FJsonValue>> temArray;
-	if (A.value.IsValid())CreateJsonArrayValue_C(temArray, A);
-	if (B.value.IsValid())CreateJsonArrayValue_C(temArray, B);
+	for (auto tem : arrays)
+		if (tem.value.IsValid())CreateJsonArrayValue_C(temArray, tem);
 	TSharedPtr < FJsonValueArray > Value = MakeShareable(new FJsonValueArray(temArray));
 	out.value = Value;
-	out.key = " ";
 	return out;
 }
 
-FJsonStruct UJsonHelper::CreateJsonArrayValueBySingle(FJsonStruct json, FString key)
-{
-	FJsonStruct out;
-	TArray<TSharedPtr<FJsonValue>> temArray;
-	if (json.value.IsValid())CreateJsonArrayValue_C(temArray, json);
-	TSharedPtr < FJsonValueArray > Value = MakeShareable(new FJsonValueArray(temArray));
-	out.value = Value;
-	out.key = key;
-	return out;
-}
-
-FJsonStruct UJsonHelper::CreateJsonArrayValueByArray(FJsonStruct A, FJsonStruct B)
-{
-	FJsonStruct out;
-	TArray<TSharedPtr<FJsonValue>> temArray;
-	if (A.value.IsValid())CreateJsonArrayValue_C(temArray, A,false);
-	if (B.value.IsValid())CreateJsonArrayValue_C(temArray, B,false);
-	TSharedPtr < FJsonValueArray > Value = MakeShareable(new FJsonValueArray(temArray));
-	out.value = Value;
-	out.key = " ";
-	return out;
-}
-
-void UJsonHelper::CreateJsonArrayValue_C(TArray<TSharedPtr<FJsonValue>>& ary, FJsonStruct addItem, bool isAppendArray)
+void UJsonHelper::CreateJsonArrayValue_C(TArray<TSharedPtr<FJsonValue>>& ary, FJsonStruct addItem)
 {
 	switch (addItem.value->Type)
 	{
 	case EJson::None:case EJson::Null:break;
-	case EJson::String:case EJson::Number:case EJson::Boolean:case EJson::Object:
+	case EJson::String:case EJson::Number:case EJson::Boolean:case EJson::Object:case EJson::Array:
 		ary.Add(addItem.value);
-		break;
-	case EJson::Array:
-		if(isAppendArray)
-			ary.Append(addItem.value->AsArray());
-		else ary.Add(addItem.value);
 		break;
 	}
 }
