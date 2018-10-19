@@ -1,0 +1,8 @@
+{
+	"BuildId": "3944462",
+	"Modules": 
+	{
+		"CsvModule": "UE4Editor-CsvModule.dll",
+		"JsonModule": "UE4Editor-JsonModule.dll"
+	}
+}
