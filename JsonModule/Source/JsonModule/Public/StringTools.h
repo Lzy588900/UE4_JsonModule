@@ -67,7 +67,7 @@ namespace MyTools {
 			return jsonValue->AsString();
 			break;
 		case EJson::Number:
-			return FString::FromInt(jsonValue->AsNumber());
+			return FString::SanitizeFloat(jsonValue->AsNumber());
 			break;
 		case EJson::Boolean:
 			return jsonValue->AsBool() ? TEXT("true") : TEXT("false");
