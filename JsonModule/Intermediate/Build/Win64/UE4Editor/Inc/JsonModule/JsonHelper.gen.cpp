@@ -202,7 +202,7 @@ static struct FScriptStruct_JsonModule_StaticRegisterNativesFJsonStruct
 			auto NewProp_isSuccess_SetBit = [](void* Obj){ ((JsonHelper_eventAddJsonArrayValue_Parms*)Obj)->isSuccess = 1; };
 			static const UE4CodeGen_Private::FBoolPropertyParams NewProp_isSuccess = { UE4CodeGen_Private::EPropertyClass::Bool, "isSuccess", RF_Public|RF_Transient|RF_MarkAsNative, 0x0010000000000180, 1, nullptr, sizeof(bool), UE4CodeGen_Private::ENativeBool::Native, sizeof(JsonHelper_eventAddJsonArrayValue_Parms), &UE4CodeGen_Private::TBoolSetBitWrapper<decltype(NewProp_isSuccess_SetBit)>::SetBit, METADATA_PARAMS(nullptr, 0) };
 			static const UE4CodeGen_Private::FStructPropertyParams NewProp_value = { UE4CodeGen_Private::EPropertyClass::Struct, "value", RF_Public|RF_Transient|RF_MarkAsNative, 0x0010000000000080, 1, nullptr, STRUCT_OFFSET(JsonHelper_eventAddJsonArrayValue_Parms, value), Z_Construct_UScriptStruct_FJsonStruct, METADATA_PARAMS(nullptr, 0) };
-			static const UE4CodeGen_Private::FStructPropertyParams NewProp_json = { UE4CodeGen_Private::EPropertyClass::Struct, "json", RF_Public|RF_Transient|RF_MarkAsNative, 0x0010000000000080, 1, nullptr, STRUCT_OFFSET(JsonHelper_eventAddJsonArrayValue_Parms, json), Z_Construct_UScriptStruct_FJsonStruct, METADATA_PARAMS(nullptr, 0) };
+			static const UE4CodeGen_Private::FStructPropertyParams NewProp_json = { UE4CodeGen_Private::EPropertyClass::Struct, "json", RF_Public|RF_Transient|RF_MarkAsNative, 0x0010000008000180, 1, nullptr, STRUCT_OFFSET(JsonHelper_eventAddJsonArrayValue_Parms, json), Z_Construct_UScriptStruct_FJsonStruct, METADATA_PARAMS(nullptr, 0) };
 			static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[] = {
 				(const UE4CodeGen_Private::FPropertyParamsBase*)&NewProp_isSuccess,
 				(const UE4CodeGen_Private::FPropertyParamsBase*)&NewProp_value,
@@ -918,7 +918,7 @@ static struct FScriptStruct_JsonModule_StaticRegisterNativesFJsonStruct
 				(UObject* (*)())Z_Construct_UPackage__Script_JsonModule,
 			};
 			static const FClassFunctionLinkInfo FuncInfo[] = {
-				{ &Z_Construct_UFunction_UJsonHelper_AddJsonArrayValue, "AddJsonArrayValue" }, // 3153611212
+				{ &Z_Construct_UFunction_UJsonHelper_AddJsonArrayValue, "AddJsonArrayValue" }, // 1275414490
 				{ &Z_Construct_UFunction_UJsonHelper_AddJsonObjectValue, "AddJsonObjectValue" }, // 3029675952
 				{ &Z_Construct_UFunction_UJsonHelper_ChangeJsonArrayValue, "ChangeJsonArrayValue" }, // 3937872861
 				{ &Z_Construct_UFunction_UJsonHelper_ChangeJsonBoolValue, "ChangeJsonBoolValue" }, // 3850033926
@@ -966,7 +966,7 @@ static struct FScriptStruct_JsonModule_StaticRegisterNativesFJsonStruct
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(UJsonHelper, 582902900);
+	IMPLEMENT_CLASS(UJsonHelper, 2156675432);
 	static FCompiledInDefer Z_CompiledInDefer_UClass_UJsonHelper(Z_Construct_UClass_UJsonHelper, &UJsonHelper::StaticClass, TEXT("/Script/JsonModule"), TEXT("UJsonHelper"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(UJsonHelper);
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

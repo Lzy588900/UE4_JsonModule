@@ -232,19 +232,17 @@ void UJsonHelper::RemoveJsonObjectValueByKey(FJsonStruct json, FString key, bool
 	//return json;
 }
 
-void UJsonHelper::AddJsonArrayValue(FJsonStruct json, FJsonStruct value, bool & isSuccess)
+void UJsonHelper::AddJsonArrayValue(UPARAM(ref)FJsonStruct & json, FJsonStruct value, bool & isSuccess)
 {
 	isSuccess = false;
 	if (!json.value.IsValid() || json.value->Type != EJson::Array)return;
-	if (!value.value.IsValid())return ;
-	auto temArray=json.value->AsArray();
+	if (!value.value.IsValid())return;
+	auto temArray = json.value->AsArray();
 	temArray.Add(value.value);
 	TSharedPtr < FJsonValueArray > Value = MakeShareable(new FJsonValueArray(temArray));
 	json.value = Value;
 	isSuccess = true;
-	//return json;
 }
-
 void UJsonHelper::AddJsonObjectValue(FJsonStruct json, FJsonStruct value, bool& isSuccess, bool isRepleace)
 {
 	isSuccess = false;

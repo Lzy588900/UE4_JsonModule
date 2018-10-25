@@ -77,7 +77,7 @@ class JSONMODULE_API UJsonHelper : public UBlueprintFunctionLibrary
 		static void RemoveJsonObjectValueByKey(FJsonStruct json, FString key, bool& isSuccess);
 	/*增加Array一个元素*/
 	UFUNCTION(BlueprintPure, Category = "Json")
-		static void AddJsonArrayValue(FJsonStruct json, FJsonStruct value, bool& isSuccess);
+		static void AddJsonArrayValue(UPARAM(ref) FJsonStruct& json, FJsonStruct value, bool& isSuccess);
 	/*增加Object一个元素*/
 	UFUNCTION(BlueprintPure, Category = "Json")
 		static void AddJsonObjectValue(FJsonStruct json, FJsonStruct value, bool& isSuccess,bool isRepleace = true);

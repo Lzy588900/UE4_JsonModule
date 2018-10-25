@@ -100,12 +100,12 @@ enum class EJsonType : uint8;
  \
 	DECLARE_FUNCTION(execAddJsonArrayValue) \
 	{ \
-		P_GET_STRUCT(FJsonStruct,Z_Param_json); \
+		P_GET_STRUCT_REF(FJsonStruct,Z_Param_Out_json); \
 		P_GET_STRUCT(FJsonStruct,Z_Param_value); \
 		P_GET_UBOOL_REF(Z_Param_Out_isSuccess); \
 		P_FINISH; \
 		P_NATIVE_BEGIN; \
-		UJsonHelper::AddJsonArrayValue(Z_Param_json,Z_Param_value,Z_Param_Out_isSuccess); \
+		UJsonHelper::AddJsonArrayValue(Z_Param_Out_json,Z_Param_value,Z_Param_Out_isSuccess); \
 		P_NATIVE_END; \
 	} \
  \
@@ -332,12 +332,12 @@ enum class EJsonType : uint8;
  \
 	DECLARE_FUNCTION(execAddJsonArrayValue) \
 	{ \
-		P_GET_STRUCT(FJsonStruct,Z_Param_json); \
+		P_GET_STRUCT_REF(FJsonStruct,Z_Param_Out_json); \
 		P_GET_STRUCT(FJsonStruct,Z_Param_value); \
 		P_GET_UBOOL_REF(Z_Param_Out_isSuccess); \
 		P_FINISH; \
 		P_NATIVE_BEGIN; \
-		UJsonHelper::AddJsonArrayValue(Z_Param_json,Z_Param_value,Z_Param_Out_isSuccess); \
+		UJsonHelper::AddJsonArrayValue(Z_Param_Out_json,Z_Param_value,Z_Param_Out_isSuccess); \
 		P_NATIVE_END; \
 	} \
  \
