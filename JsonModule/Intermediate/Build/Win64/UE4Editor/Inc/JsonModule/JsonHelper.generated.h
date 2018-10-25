@@ -94,7 +94,7 @@ enum class EJsonType : uint8;
 		P_GET_UBOOL(Z_Param_isRepleace); \
 		P_FINISH; \
 		P_NATIVE_BEGIN; \
-		*(FJsonStruct*)Z_Param__Result=UJsonHelper::AddJsonObjectValue(Z_Param_json,Z_Param_value,Z_Param_Out_isSuccess,Z_Param_isRepleace); \
+		UJsonHelper::AddJsonObjectValue(Z_Param_json,Z_Param_value,Z_Param_Out_isSuccess,Z_Param_isRepleace); \
 		P_NATIVE_END; \
 	} \
  \
@@ -105,7 +105,7 @@ enum class EJsonType : uint8;
 		P_GET_UBOOL_REF(Z_Param_Out_isSuccess); \
 		P_FINISH; \
 		P_NATIVE_BEGIN; \
-		*(FJsonStruct*)Z_Param__Result=UJsonHelper::AddJsonArrayValue(Z_Param_json,Z_Param_value,Z_Param_Out_isSuccess); \
+		UJsonHelper::AddJsonArrayValue(Z_Param_json,Z_Param_value,Z_Param_Out_isSuccess); \
 		P_NATIVE_END; \
 	} \
  \
@@ -116,7 +116,7 @@ enum class EJsonType : uint8;
 		P_GET_UBOOL_REF(Z_Param_Out_isSuccess); \
 		P_FINISH; \
 		P_NATIVE_BEGIN; \
-		*(FJsonStruct*)Z_Param__Result=UJsonHelper::RemoveJsonObjectValueByKey(Z_Param_json,Z_Param_key,Z_Param_Out_isSuccess); \
+		UJsonHelper::RemoveJsonObjectValueByKey(Z_Param_json,Z_Param_key,Z_Param_Out_isSuccess); \
 		P_NATIVE_END; \
 	} \
  \
@@ -127,7 +127,7 @@ enum class EJsonType : uint8;
 		P_GET_UBOOL_REF(Z_Param_Out_isSuccess); \
 		P_FINISH; \
 		P_NATIVE_BEGIN; \
-		*(FJsonStruct*)Z_Param__Result=UJsonHelper::RemoveJsonArrayValueByValue(Z_Param_json,Z_Param_value,Z_Param_Out_isSuccess); \
+		UJsonHelper::RemoveJsonArrayValueByValue(Z_Param_json,Z_Param_value,Z_Param_Out_isSuccess); \
 		P_NATIVE_END; \
 	} \
  \
@@ -326,7 +326,7 @@ enum class EJsonType : uint8;
 		P_GET_UBOOL(Z_Param_isRepleace); \
 		P_FINISH; \
 		P_NATIVE_BEGIN; \
-		*(FJsonStruct*)Z_Param__Result=UJsonHelper::AddJsonObjectValue(Z_Param_json,Z_Param_value,Z_Param_Out_isSuccess,Z_Param_isRepleace); \
+		UJsonHelper::AddJsonObjectValue(Z_Param_json,Z_Param_value,Z_Param_Out_isSuccess,Z_Param_isRepleace); \
 		P_NATIVE_END; \
 	} \
  \
@@ -337,7 +337,7 @@ enum class EJsonType : uint8;
 		P_GET_UBOOL_REF(Z_Param_Out_isSuccess); \
 		P_FINISH; \
 		P_NATIVE_BEGIN; \
-		*(FJsonStruct*)Z_Param__Result=UJsonHelper::AddJsonArrayValue(Z_Param_json,Z_Param_value,Z_Param_Out_isSuccess); \
+		UJsonHelper::AddJsonArrayValue(Z_Param_json,Z_Param_value,Z_Param_Out_isSuccess); \
 		P_NATIVE_END; \
 	} \
  \
@@ -348,7 +348,7 @@ enum class EJsonType : uint8;
 		P_GET_UBOOL_REF(Z_Param_Out_isSuccess); \
 		P_FINISH; \
 		P_NATIVE_BEGIN; \
-		*(FJsonStruct*)Z_Param__Result=UJsonHelper::RemoveJsonObjectValueByKey(Z_Param_json,Z_Param_key,Z_Param_Out_isSuccess); \
+		UJsonHelper::RemoveJsonObjectValueByKey(Z_Param_json,Z_Param_key,Z_Param_Out_isSuccess); \
 		P_NATIVE_END; \
 	} \
  \
@@ -359,7 +359,7 @@ enum class EJsonType : uint8;
 		P_GET_UBOOL_REF(Z_Param_Out_isSuccess); \
 		P_FINISH; \
 		P_NATIVE_BEGIN; \
-		*(FJsonStruct*)Z_Param__Result=UJsonHelper::RemoveJsonArrayValueByValue(Z_Param_json,Z_Param_value,Z_Param_Out_isSuccess); \
+		UJsonHelper::RemoveJsonArrayValueByValue(Z_Param_json,Z_Param_value,Z_Param_Out_isSuccess); \
 		P_NATIVE_END; \
 	} \
  \

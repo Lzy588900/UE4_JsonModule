@@ -71,16 +71,16 @@ class JSONMODULE_API UJsonHelper : public UBlueprintFunctionLibrary
 
 	/*从Array中移除某一项*/
 	UFUNCTION(BlueprintPure, Category = "Json")
-		static FJsonStruct RemoveJsonArrayValueByValue(FJsonStruct json, FJsonStruct value,bool& isSuccess);
+		static void RemoveJsonArrayValueByValue(FJsonStruct json, FJsonStruct value,bool& isSuccess);
 	/*从Objec中移除某一项*/
 	UFUNCTION(BlueprintPure, Category = "Json")
-		static FJsonStruct RemoveJsonObjectValueByKey(FJsonStruct json, FString key, bool& isSuccess);
+		static void RemoveJsonObjectValueByKey(FJsonStruct json, FString key, bool& isSuccess);
 	/*增加Array一个元素*/
 	UFUNCTION(BlueprintPure, Category = "Json")
-		static FJsonStruct AddJsonArrayValue(FJsonStruct json, FJsonStruct value, bool& isSuccess);
+		static void AddJsonArrayValue(FJsonStruct json, FJsonStruct value, bool& isSuccess);
 	/*增加Object一个元素*/
 	UFUNCTION(BlueprintPure, Category = "Json")
-		static FJsonStruct AddJsonObjectValue(FJsonStruct json, FJsonStruct value, bool& isSuccess,bool isRepleace = true);
+		static void AddJsonObjectValue(FJsonStruct json, FJsonStruct value, bool& isSuccess,bool isRepleace = true);
 
 	/*生成基础类型*/
 	UFUNCTION(BlueprintPure, Category = "Json")

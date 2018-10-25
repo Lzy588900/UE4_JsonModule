@@ -101,7 +101,7 @@ bool UJsonHelper::FindJsonFromObject_C(TSharedPtr<FJsonValue> json, FString key,
 		case EJson::String: {
 			auto tem = json->AsObject()->GetField<EJson::String>(key);
 			if (tem.IsValid() && tem->AsString().Equals(value)) {
-				result = json;
+				result = tem;
 				return true;
 			}
 			else return false;
@@ -110,7 +110,7 @@ bool UJsonHelper::FindJsonFromObject_C(TSharedPtr<FJsonValue> json, FString key,
 		case EJson::Number: {
 			auto tem = json->AsObject()->GetField<EJson::String>(key);
 			if (tem.IsValid() && tem->AsNumber() == FCString::Atof(*value)) {
-				result = json;
+				result = tem;
 				return true;
 			}
 			else return false;
@@ -119,13 +119,28 @@ bool UJsonHelper::FindJsonFromObject_C(TSharedPtr<FJsonValue> json, FString key,
 		case EJson::Boolean: {
 			auto tem = json->AsObject()->GetField<EJson::String>(key);
 			if (tem.IsValid() && value.Equals(tem->AsBool() ? "true" : "false")) {
-				result = json;
+				result = tem;
 				return true;
 			}
 			else return false;
 			break;
 		}
-		case EJson::Array:case EJson::Object:return false; break;
+		case EJson::Array: {
+			auto tem = json->AsObject()->GetField<EJson::Array>(key);
+			if (tem.IsValid()){
+				result = tem;
+				return true;
+			}
+			break;
+		}
+		case EJson::Object: {
+			auto tem = json->AsObject()->GetField<EJson::Object>(key);
+			if (tem.IsValid()) {
+				result = tem;
+				return true;
+			}
+			break;
+		}
 		}
 		return false;
 	}
@@ -184,11 +199,11 @@ FJsonStruct UJsonHelper::ChangeJsonObjectValue(FJsonStruct json, FString key, FJ
 }
 
 
-FJsonStruct UJsonHelper::RemoveJsonArrayValueByValue(FJsonStruct json, FJsonStruct value, bool& isSuccess)
+void UJsonHelper::RemoveJsonArrayValueByValue(FJsonStruct json, FJsonStruct value, bool& isSuccess)
 {
 	isSuccess = false;
-	if (!json.value.IsValid() || json.value->Type != EJson::Array)return json;
-	if (!value.value.IsValid())return json;
+	if (!json.value.IsValid() || json.value->Type != EJson::Array)return ;
+	if (!value.value.IsValid())return ;
 	auto arrays = json.value->AsArray();
 	auto index = 0;
 	for (auto tem : arrays) {
@@ -200,50 +215,51 @@ FJsonStruct UJsonHelper::RemoveJsonArrayValueByValue(FJsonStruct json, FJsonStru
 			TSharedPtr < FJsonValueArray > Value = MakeShareable(new FJsonValueArray(arrays));
 			json.value = Value;
 			isSuccess = true;
-			return json;
+			return ;
 		}
 		index++;
 	}
-	return json;
+	return ;
 }
 
-FJsonStruct UJsonHelper::RemoveJsonObjectValueByKey(FJsonStruct json, FString key, bool& isSuccess)
+void UJsonHelper::RemoveJsonObjectValueByKey(FJsonStruct json, FString key, bool& isSuccess)
 {
 	isSuccess = false;
-	if (!json.value.IsValid() || json.value->Type != EJson::Object)return json;
+	if (!json.value.IsValid() || json.value->Type != EJson::Object)return ;
 	isSuccess=json.value->AsObject()->HasField(key);
-	json.value->AsObject()->RemoveField(key);
-	return json;
+	if(isSuccess)
+		json.value->AsObject()->RemoveField(key);
+	//return json;
 }
 
-FJsonStruct UJsonHelper::AddJsonArrayValue(FJsonStruct json, FJsonStruct value, bool & isSuccess)
+void UJsonHelper::AddJsonArrayValue(FJsonStruct json, FJsonStruct value, bool & isSuccess)
 {
 	isSuccess = false;
-	if (!json.value.IsValid() || json.value->Type != EJson::Array)return json;
-	if (!value.value.IsValid())return json;
+	if (!json.value.IsValid() || json.value->Type != EJson::Array)return;
+	if (!value.value.IsValid())return ;
 	auto temArray=json.value->AsArray();
 	temArray.Add(value.value);
 	TSharedPtr < FJsonValueArray > Value = MakeShareable(new FJsonValueArray(temArray));
 	json.value = Value;
 	isSuccess = true;
-	return json;
+	//return json;
 }
 
-FJsonStruct UJsonHelper::AddJsonObjectValue(FJsonStruct json, FJsonStruct value, bool& isSuccess, bool isRepleace)
+void UJsonHelper::AddJsonObjectValue(FJsonStruct json, FJsonStruct value, bool& isSuccess, bool isRepleace)
 {
 	isSuccess = false;
-	if (!json.value.IsValid() || json.value->Type != EJson::Object)return json;
-	if (!value.value.IsValid())return json;
+	if (!json.value.IsValid() || json.value->Type != EJson::Object)return ;
+	if (!value.value.IsValid())return ;
 	if (isRepleace) {
 		json.value->AsObject()->SetField(value.key, value.value);
 		isSuccess = true;
-		return json;
+		return ;
 	}
 	else {
-		if (json.value->AsObject()->HasField(value.key))return json;
+		if (json.value->AsObject()->HasField(value.key))return ;
 		json.value->AsObject()->SetField(value.key, value.value);
 		isSuccess = true;
-		return json;
+		return ;
 	}
 }
 
