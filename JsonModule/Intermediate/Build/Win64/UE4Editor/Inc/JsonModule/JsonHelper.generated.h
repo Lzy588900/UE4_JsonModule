@@ -136,50 +136,22 @@ enum class EJsonType : uint8;
 		P_GET_STRUCT(FJsonStruct,Z_Param_json); \
 		P_GET_PROPERTY(UStrProperty,Z_Param_key); \
 		P_GET_STRUCT(FJsonStruct,Z_Param_value); \
+		P_GET_UBOOL_REF(Z_Param_Out_isSuccess); \
 		P_FINISH; \
 		P_NATIVE_BEGIN; \
-		*(FJsonStruct*)Z_Param__Result=UJsonHelper::ChangeJsonObjectValue(Z_Param_json,Z_Param_key,Z_Param_value); \
+		UJsonHelper::ChangeJsonObjectValue(Z_Param_json,Z_Param_key,Z_Param_value,Z_Param_Out_isSuccess); \
 		P_NATIVE_END; \
 	} \
  \
 	DECLARE_FUNCTION(execChangeJsonArrayValue) \
 	{ \
-		P_GET_STRUCT(FJsonStruct,Z_Param_json); \
+		P_GET_STRUCT_REF(FJsonStruct,Z_Param_Out_json); \
 		P_GET_STRUCT(FJsonStruct,Z_Param_from); \
 		P_GET_STRUCT(FJsonStruct,Z_Param_to); \
+		P_GET_UBOOL_REF(Z_Param_Out_isSuccess); \
 		P_FINISH; \
 		P_NATIVE_BEGIN; \
-		*(FJsonStruct*)Z_Param__Result=UJsonHelper::ChangeJsonArrayValue(Z_Param_json,Z_Param_from,Z_Param_to); \
-		P_NATIVE_END; \
-	} \
- \
-	DECLARE_FUNCTION(execChangeJsonBoolValue) \
-	{ \
-		P_GET_STRUCT(FJsonStruct,Z_Param_json); \
-		P_GET_UBOOL(Z_Param_value); \
-		P_FINISH; \
-		P_NATIVE_BEGIN; \
-		*(FJsonStruct*)Z_Param__Result=UJsonHelper::ChangeJsonBoolValue(Z_Param_json,Z_Param_value); \
-		P_NATIVE_END; \
-	} \
- \
-	DECLARE_FUNCTION(execChangeJsonNumberValue) \
-	{ \
-		P_GET_STRUCT(FJsonStruct,Z_Param_json); \
-		P_GET_PROPERTY(UFloatProperty,Z_Param_value); \
-		P_FINISH; \
-		P_NATIVE_BEGIN; \
-		*(FJsonStruct*)Z_Param__Result=UJsonHelper::ChangeJsonNumberValue(Z_Param_json,Z_Param_value); \
-		P_NATIVE_END; \
-	} \
- \
-	DECLARE_FUNCTION(execChangeJsonStringValue) \
-	{ \
-		P_GET_STRUCT(FJsonStruct,Z_Param_json); \
-		P_GET_PROPERTY(UStrProperty,Z_Param_value); \
-		P_FINISH; \
-		P_NATIVE_BEGIN; \
-		*(FJsonStruct*)Z_Param__Result=UJsonHelper::ChangeJsonStringValue(Z_Param_json,Z_Param_value); \
+		UJsonHelper::ChangeJsonArrayValue(Z_Param_Out_json,Z_Param_from,Z_Param_to,Z_Param_Out_isSuccess); \
 		P_NATIVE_END; \
 	} \
  \
@@ -368,50 +340,22 @@ enum class EJsonType : uint8;
 		P_GET_STRUCT(FJsonStruct,Z_Param_json); \
 		P_GET_PROPERTY(UStrProperty,Z_Param_key); \
 		P_GET_STRUCT(FJsonStruct,Z_Param_value); \
+		P_GET_UBOOL_REF(Z_Param_Out_isSuccess); \
 		P_FINISH; \
 		P_NATIVE_BEGIN; \
-		*(FJsonStruct*)Z_Param__Result=UJsonHelper::ChangeJsonObjectValue(Z_Param_json,Z_Param_key,Z_Param_value); \
+		UJsonHelper::ChangeJsonObjectValue(Z_Param_json,Z_Param_key,Z_Param_value,Z_Param_Out_isSuccess); \
 		P_NATIVE_END; \
 	} \
  \
 	DECLARE_FUNCTION(execChangeJsonArrayValue) \
 	{ \
-		P_GET_STRUCT(FJsonStruct,Z_Param_json); \
+		P_GET_STRUCT_REF(FJsonStruct,Z_Param_Out_json); \
 		P_GET_STRUCT(FJsonStruct,Z_Param_from); \
 		P_GET_STRUCT(FJsonStruct,Z_Param_to); \
+		P_GET_UBOOL_REF(Z_Param_Out_isSuccess); \
 		P_FINISH; \
 		P_NATIVE_BEGIN; \
-		*(FJsonStruct*)Z_Param__Result=UJsonHelper::ChangeJsonArrayValue(Z_Param_json,Z_Param_from,Z_Param_to); \
-		P_NATIVE_END; \
-	} \
- \
-	DECLARE_FUNCTION(execChangeJsonBoolValue) \
-	{ \
-		P_GET_STRUCT(FJsonStruct,Z_Param_json); \
-		P_GET_UBOOL(Z_Param_value); \
-		P_FINISH; \
-		P_NATIVE_BEGIN; \
-		*(FJsonStruct*)Z_Param__Result=UJsonHelper::ChangeJsonBoolValue(Z_Param_json,Z_Param_value); \
-		P_NATIVE_END; \
-	} \
- \
-	DECLARE_FUNCTION(execChangeJsonNumberValue) \
-	{ \
-		P_GET_STRUCT(FJsonStruct,Z_Param_json); \
-		P_GET_PROPERTY(UFloatProperty,Z_Param_value); \
-		P_FINISH; \
-		P_NATIVE_BEGIN; \
-		*(FJsonStruct*)Z_Param__Result=UJsonHelper::ChangeJsonNumberValue(Z_Param_json,Z_Param_value); \
-		P_NATIVE_END; \
-	} \
- \
-	DECLARE_FUNCTION(execChangeJsonStringValue) \
-	{ \
-		P_GET_STRUCT(FJsonStruct,Z_Param_json); \
-		P_GET_PROPERTY(UStrProperty,Z_Param_value); \
-		P_FINISH; \
-		P_NATIVE_BEGIN; \
-		*(FJsonStruct*)Z_Param__Result=UJsonHelper::ChangeJsonStringValue(Z_Param_json,Z_Param_value); \
+		UJsonHelper::ChangeJsonArrayValue(Z_Param_Out_json,Z_Param_from,Z_Param_to,Z_Param_Out_isSuccess); \
 		P_NATIVE_END; \
 	} \
  \

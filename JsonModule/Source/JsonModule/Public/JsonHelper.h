@@ -57,16 +57,9 @@ class JSONMODULE_API UJsonHelper : public UBlueprintFunctionLibrary
 		static FJsonStruct SetJsonKey(FJsonStruct json,FString key);
 	/*设置Json Value*/
 	UFUNCTION(BlueprintPure, Category = "Json")
-		static FJsonStruct ChangeJsonStringValue(FJsonStruct json, FString value);
+		static void ChangeJsonArrayValue(UPARAM(ref)FJsonStruct& json, FJsonStruct from, FJsonStruct to, bool& isSuccess);
 	UFUNCTION(BlueprintPure, Category = "Json")
-		static FJsonStruct ChangeJsonNumberValue(FJsonStruct json, float value);
-	UFUNCTION(BlueprintPure, Category = "Json")
-		static FJsonStruct ChangeJsonBoolValue(FJsonStruct json, bool value);
-
-	UFUNCTION(BlueprintPure, Category = "Json")
-		static FJsonStruct ChangeJsonArrayValue(FJsonStruct json, FJsonStruct from, FJsonStruct to);
-	UFUNCTION(BlueprintPure, Category = "Json")
-		static FJsonStruct ChangeJsonObjectValue(FJsonStruct json, FString key, FJsonStruct value);
+		static void ChangeJsonObjectValue(FJsonStruct json, FString key, FJsonStruct value, bool& isSuccess);
 
 
 	/*从Array中移除某一项*/

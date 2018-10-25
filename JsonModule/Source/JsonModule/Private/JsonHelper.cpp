@@ -152,28 +152,11 @@ FJsonStruct UJsonHelper::SetJsonKey(FJsonStruct json, FString key)
 	return json;
 }
 
-FJsonStruct UJsonHelper::ChangeJsonStringValue(FJsonStruct json, FString value)
+void UJsonHelper::ChangeJsonArrayValue(UPARAM(ref)FJsonStruct& json, FJsonStruct from, FJsonStruct to, bool& isSuccess)
 {
-	json = CreateJsonStringValue(json.key, value);
-	return json;
-}
-
-FJsonStruct UJsonHelper::ChangeJsonNumberValue(FJsonStruct json, float value)
-{
-	json = CreateJsonNumberValue(json.key, value);
-	return json;
-}
-
-FJsonStruct UJsonHelper::ChangeJsonBoolValue(FJsonStruct json, bool value)
-{
-	json = CreateJsonBoolValue(json.key, value);
-	return json;
-}
-
-FJsonStruct UJsonHelper::ChangeJsonArrayValue(FJsonStruct json, FJsonStruct from, FJsonStruct to)
-{
-	if (!json.value.IsValid() || json.value->Type != EJson::Array)return json;
-	if (!from.value.IsValid() || !to.value.IsValid())return json;
+	isSuccess = false;
+	if (!json.value.IsValid() || json.value->Type != EJson::Array)return ;
+	if (!from.value.IsValid() || !to.value.IsValid())return ;
 	auto arrays = json.value->AsArray();
 	auto index = 0;
 	for (auto tem : arrays) {
@@ -184,18 +167,19 @@ FJsonStruct UJsonHelper::ChangeJsonArrayValue(FJsonStruct json, FJsonStruct from
 			arrays[index] = to.value;
 			TSharedPtr < FJsonValueArray > Value = MakeShareable(new FJsonValueArray(arrays));
 			json.value = Value;
-			return json;
+			isSuccess = true;
+			return ;
 		}
 		index++;
 	}
-	return json;
 }
 
-FJsonStruct UJsonHelper::ChangeJsonObjectValue(FJsonStruct json, FString key, FJsonStruct value)
+void UJsonHelper::ChangeJsonObjectValue(FJsonStruct json, FString key, FJsonStruct value, bool& isSuccess)
 {
-	if (!json.value.IsValid() || json.value->Type != EJson::Object)return json;
+	isSuccess = false;
+	if (!json.value.IsValid() || json.value->Type != EJson::Object)return ;
+	isSuccess = json.value->AsObject()->HasField(key);
 	json.value->AsObject()->SetField(key, value.value);
-	return json;
 }
 
 

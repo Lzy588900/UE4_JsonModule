@@ -22,10 +22,7 @@ void EmptyLinkFunctionForGeneratedCodeJsonHelper() {}
 	JSONMODULE_API UFunction* Z_Construct_UFunction_UJsonHelper_AddJsonArrayValue();
 	JSONMODULE_API UFunction* Z_Construct_UFunction_UJsonHelper_AddJsonObjectValue();
 	JSONMODULE_API UFunction* Z_Construct_UFunction_UJsonHelper_ChangeJsonArrayValue();
-	JSONMODULE_API UFunction* Z_Construct_UFunction_UJsonHelper_ChangeJsonBoolValue();
-	JSONMODULE_API UFunction* Z_Construct_UFunction_UJsonHelper_ChangeJsonNumberValue();
 	JSONMODULE_API UFunction* Z_Construct_UFunction_UJsonHelper_ChangeJsonObjectValue();
-	JSONMODULE_API UFunction* Z_Construct_UFunction_UJsonHelper_ChangeJsonStringValue();
 	JSONMODULE_API UFunction* Z_Construct_UFunction_UJsonHelper_CreateJsonArray();
 	JSONMODULE_API UFunction* Z_Construct_UFunction_UJsonHelper_CreateJsonArrayByValue();
 	JSONMODULE_API UFunction* Z_Construct_UFunction_UJsonHelper_CreateJsonBoolValue();
@@ -165,10 +162,7 @@ static struct FScriptStruct_JsonModule_StaticRegisterNativesFJsonStruct
 			{ "AddJsonArrayValue", &UJsonHelper::execAddJsonArrayValue },
 			{ "AddJsonObjectValue", &UJsonHelper::execAddJsonObjectValue },
 			{ "ChangeJsonArrayValue", &UJsonHelper::execChangeJsonArrayValue },
-			{ "ChangeJsonBoolValue", &UJsonHelper::execChangeJsonBoolValue },
-			{ "ChangeJsonNumberValue", &UJsonHelper::execChangeJsonNumberValue },
 			{ "ChangeJsonObjectValue", &UJsonHelper::execChangeJsonObjectValue },
-			{ "ChangeJsonStringValue", &UJsonHelper::execChangeJsonStringValue },
 			{ "CreateJsonArray", &UJsonHelper::execCreateJsonArray },
 			{ "CreateJsonArrayByValue", &UJsonHelper::execCreateJsonArrayByValue },
 			{ "CreateJsonBoolValue", &UJsonHelper::execCreateJsonBoolValue },
@@ -264,17 +258,18 @@ static struct FScriptStruct_JsonModule_StaticRegisterNativesFJsonStruct
 			FJsonStruct json;
 			FJsonStruct from;
 			FJsonStruct to;
-			FJsonStruct ReturnValue;
+			bool isSuccess;
 		};
 		static UFunction* ReturnFunction = nullptr;
 		if (!ReturnFunction)
 		{
-			static const UE4CodeGen_Private::FStructPropertyParams NewProp_ReturnValue = { UE4CodeGen_Private::EPropertyClass::Struct, "ReturnValue", RF_Public|RF_Transient|RF_MarkAsNative, 0x0010000000000580, 1, nullptr, STRUCT_OFFSET(JsonHelper_eventChangeJsonArrayValue_Parms, ReturnValue), Z_Construct_UScriptStruct_FJsonStruct, METADATA_PARAMS(nullptr, 0) };
+			auto NewProp_isSuccess_SetBit = [](void* Obj){ ((JsonHelper_eventChangeJsonArrayValue_Parms*)Obj)->isSuccess = 1; };
+			static const UE4CodeGen_Private::FBoolPropertyParams NewProp_isSuccess = { UE4CodeGen_Private::EPropertyClass::Bool, "isSuccess", RF_Public|RF_Transient|RF_MarkAsNative, 0x0010000000000180, 1, nullptr, sizeof(bool), UE4CodeGen_Private::ENativeBool::Native, sizeof(JsonHelper_eventChangeJsonArrayValue_Parms), &UE4CodeGen_Private::TBoolSetBitWrapper<decltype(NewProp_isSuccess_SetBit)>::SetBit, METADATA_PARAMS(nullptr, 0) };
 			static const UE4CodeGen_Private::FStructPropertyParams NewProp_to = { UE4CodeGen_Private::EPropertyClass::Struct, "to", RF_Public|RF_Transient|RF_MarkAsNative, 0x0010000000000080, 1, nullptr, STRUCT_OFFSET(JsonHelper_eventChangeJsonArrayValue_Parms, to), Z_Construct_UScriptStruct_FJsonStruct, METADATA_PARAMS(nullptr, 0) };
 			static const UE4CodeGen_Private::FStructPropertyParams NewProp_from = { UE4CodeGen_Private::EPropertyClass::Struct, "from", RF_Public|RF_Transient|RF_MarkAsNative, 0x0010000000000080, 1, nullptr, STRUCT_OFFSET(JsonHelper_eventChangeJsonArrayValue_Parms, from), Z_Construct_UScriptStruct_FJsonStruct, METADATA_PARAMS(nullptr, 0) };
-			static const UE4CodeGen_Private::FStructPropertyParams NewProp_json = { UE4CodeGen_Private::EPropertyClass::Struct, "json", RF_Public|RF_Transient|RF_MarkAsNative, 0x0010000000000080, 1, nullptr, STRUCT_OFFSET(JsonHelper_eventChangeJsonArrayValue_Parms, json), Z_Construct_UScriptStruct_FJsonStruct, METADATA_PARAMS(nullptr, 0) };
+			static const UE4CodeGen_Private::FStructPropertyParams NewProp_json = { UE4CodeGen_Private::EPropertyClass::Struct, "json", RF_Public|RF_Transient|RF_MarkAsNative, 0x0010000008000180, 1, nullptr, STRUCT_OFFSET(JsonHelper_eventChangeJsonArrayValue_Parms, json), Z_Construct_UScriptStruct_FJsonStruct, METADATA_PARAMS(nullptr, 0) };
 			static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[] = {
-				(const UE4CodeGen_Private::FPropertyParamsBase*)&NewProp_ReturnValue,
+				(const UE4CodeGen_Private::FPropertyParamsBase*)&NewProp_isSuccess,
 				(const UE4CodeGen_Private::FPropertyParamsBase*)&NewProp_to,
 				(const UE4CodeGen_Private::FPropertyParamsBase*)&NewProp_from,
 				(const UE4CodeGen_Private::FPropertyParamsBase*)&NewProp_json,
@@ -283,70 +278,10 @@ static struct FScriptStruct_JsonModule_StaticRegisterNativesFJsonStruct
 			static const UE4CodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
 				{ "Category", "Json" },
 				{ "ModuleRelativePath", "Public/JsonHelper.h" },
+				{ "ToolTip", "????Json Value" },
 			};
 #endif
-			static const UE4CodeGen_Private::FFunctionParams FuncParams = { (UObject*(*)())Z_Construct_UClass_UJsonHelper, "ChangeJsonArrayValue", RF_Public|RF_Transient|RF_MarkAsNative, nullptr, (EFunctionFlags)0x14042401, sizeof(JsonHelper_eventChangeJsonArrayValue_Parms), PropPointers, ARRAY_COUNT(PropPointers), 0, 0, METADATA_PARAMS(Function_MetaDataParams, ARRAY_COUNT(Function_MetaDataParams)) };
-			UE4CodeGen_Private::ConstructUFunction(ReturnFunction, FuncParams);
-		}
-		return ReturnFunction;
-	}
-	UFunction* Z_Construct_UFunction_UJsonHelper_ChangeJsonBoolValue()
-	{
-		struct JsonHelper_eventChangeJsonBoolValue_Parms
-		{
-			FJsonStruct json;
-			bool value;
-			FJsonStruct ReturnValue;
-		};
-		static UFunction* ReturnFunction = nullptr;
-		if (!ReturnFunction)
-		{
-			static const UE4CodeGen_Private::FStructPropertyParams NewProp_ReturnValue = { UE4CodeGen_Private::EPropertyClass::Struct, "ReturnValue", RF_Public|RF_Transient|RF_MarkAsNative, 0x0010000000000580, 1, nullptr, STRUCT_OFFSET(JsonHelper_eventChangeJsonBoolValue_Parms, ReturnValue), Z_Construct_UScriptStruct_FJsonStruct, METADATA_PARAMS(nullptr, 0) };
-			auto NewProp_value_SetBit = [](void* Obj){ ((JsonHelper_eventChangeJsonBoolValue_Parms*)Obj)->value = 1; };
-			static const UE4CodeGen_Private::FBoolPropertyParams NewProp_value = { UE4CodeGen_Private::EPropertyClass::Bool, "value", RF_Public|RF_Transient|RF_MarkAsNative, 0x0010000000000080, 1, nullptr, sizeof(bool), UE4CodeGen_Private::ENativeBool::Native, sizeof(JsonHelper_eventChangeJsonBoolValue_Parms), &UE4CodeGen_Private::TBoolSetBitWrapper<decltype(NewProp_value_SetBit)>::SetBit, METADATA_PARAMS(nullptr, 0) };
-			static const UE4CodeGen_Private::FStructPropertyParams NewProp_json = { UE4CodeGen_Private::EPropertyClass::Struct, "json", RF_Public|RF_Transient|RF_MarkAsNative, 0x0010000000000080, 1, nullptr, STRUCT_OFFSET(JsonHelper_eventChangeJsonBoolValue_Parms, json), Z_Construct_UScriptStruct_FJsonStruct, METADATA_PARAMS(nullptr, 0) };
-			static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[] = {
-				(const UE4CodeGen_Private::FPropertyParamsBase*)&NewProp_ReturnValue,
-				(const UE4CodeGen_Private::FPropertyParamsBase*)&NewProp_value,
-				(const UE4CodeGen_Private::FPropertyParamsBase*)&NewProp_json,
-			};
-#if WITH_METADATA
-			static const UE4CodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
-				{ "Category", "Json" },
-				{ "ModuleRelativePath", "Public/JsonHelper.h" },
-			};
-#endif
-			static const UE4CodeGen_Private::FFunctionParams FuncParams = { (UObject*(*)())Z_Construct_UClass_UJsonHelper, "ChangeJsonBoolValue", RF_Public|RF_Transient|RF_MarkAsNative, nullptr, (EFunctionFlags)0x14042401, sizeof(JsonHelper_eventChangeJsonBoolValue_Parms), PropPointers, ARRAY_COUNT(PropPointers), 0, 0, METADATA_PARAMS(Function_MetaDataParams, ARRAY_COUNT(Function_MetaDataParams)) };
-			UE4CodeGen_Private::ConstructUFunction(ReturnFunction, FuncParams);
-		}
-		return ReturnFunction;
-	}
-	UFunction* Z_Construct_UFunction_UJsonHelper_ChangeJsonNumberValue()
-	{
-		struct JsonHelper_eventChangeJsonNumberValue_Parms
-		{
-			FJsonStruct json;
-			float value;
-			FJsonStruct ReturnValue;
-		};
-		static UFunction* ReturnFunction = nullptr;
-		if (!ReturnFunction)
-		{
-			static const UE4CodeGen_Private::FStructPropertyParams NewProp_ReturnValue = { UE4CodeGen_Private::EPropertyClass::Struct, "ReturnValue", RF_Public|RF_Transient|RF_MarkAsNative, 0x0010000000000580, 1, nullptr, STRUCT_OFFSET(JsonHelper_eventChangeJsonNumberValue_Parms, ReturnValue), Z_Construct_UScriptStruct_FJsonStruct, METADATA_PARAMS(nullptr, 0) };
-			static const UE4CodeGen_Private::FFloatPropertyParams NewProp_value = { UE4CodeGen_Private::EPropertyClass::Float, "value", RF_Public|RF_Transient|RF_MarkAsNative, 0x0010000000000080, 1, nullptr, STRUCT_OFFSET(JsonHelper_eventChangeJsonNumberValue_Parms, value), METADATA_PARAMS(nullptr, 0) };
-			static const UE4CodeGen_Private::FStructPropertyParams NewProp_json = { UE4CodeGen_Private::EPropertyClass::Struct, "json", RF_Public|RF_Transient|RF_MarkAsNative, 0x0010000000000080, 1, nullptr, STRUCT_OFFSET(JsonHelper_eventChangeJsonNumberValue_Parms, json), Z_Construct_UScriptStruct_FJsonStruct, METADATA_PARAMS(nullptr, 0) };
-			static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[] = {
-				(const UE4CodeGen_Private::FPropertyParamsBase*)&NewProp_ReturnValue,
-				(const UE4CodeGen_Private::FPropertyParamsBase*)&NewProp_value,
-				(const UE4CodeGen_Private::FPropertyParamsBase*)&NewProp_json,
-			};
-#if WITH_METADATA
-			static const UE4CodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
-				{ "Category", "Json" },
-				{ "ModuleRelativePath", "Public/JsonHelper.h" },
-			};
-#endif
-			static const UE4CodeGen_Private::FFunctionParams FuncParams = { (UObject*(*)())Z_Construct_UClass_UJsonHelper, "ChangeJsonNumberValue", RF_Public|RF_Transient|RF_MarkAsNative, nullptr, (EFunctionFlags)0x14042401, sizeof(JsonHelper_eventChangeJsonNumberValue_Parms), PropPointers, ARRAY_COUNT(PropPointers), 0, 0, METADATA_PARAMS(Function_MetaDataParams, ARRAY_COUNT(Function_MetaDataParams)) };
+			static const UE4CodeGen_Private::FFunctionParams FuncParams = { (UObject*(*)())Z_Construct_UClass_UJsonHelper, "ChangeJsonArrayValue", RF_Public|RF_Transient|RF_MarkAsNative, nullptr, (EFunctionFlags)0x14442401, sizeof(JsonHelper_eventChangeJsonArrayValue_Parms), PropPointers, ARRAY_COUNT(PropPointers), 0, 0, METADATA_PARAMS(Function_MetaDataParams, ARRAY_COUNT(Function_MetaDataParams)) };
 			UE4CodeGen_Private::ConstructUFunction(ReturnFunction, FuncParams);
 		}
 		return ReturnFunction;
@@ -358,17 +293,18 @@ static struct FScriptStruct_JsonModule_StaticRegisterNativesFJsonStruct
 			FJsonStruct json;
 			FString key;
 			FJsonStruct value;
-			FJsonStruct ReturnValue;
+			bool isSuccess;
 		};
 		static UFunction* ReturnFunction = nullptr;
 		if (!ReturnFunction)
 		{
-			static const UE4CodeGen_Private::FStructPropertyParams NewProp_ReturnValue = { UE4CodeGen_Private::EPropertyClass::Struct, "ReturnValue", RF_Public|RF_Transient|RF_MarkAsNative, 0x0010000000000580, 1, nullptr, STRUCT_OFFSET(JsonHelper_eventChangeJsonObjectValue_Parms, ReturnValue), Z_Construct_UScriptStruct_FJsonStruct, METADATA_PARAMS(nullptr, 0) };
+			auto NewProp_isSuccess_SetBit = [](void* Obj){ ((JsonHelper_eventChangeJsonObjectValue_Parms*)Obj)->isSuccess = 1; };
+			static const UE4CodeGen_Private::FBoolPropertyParams NewProp_isSuccess = { UE4CodeGen_Private::EPropertyClass::Bool, "isSuccess", RF_Public|RF_Transient|RF_MarkAsNative, 0x0010000000000180, 1, nullptr, sizeof(bool), UE4CodeGen_Private::ENativeBool::Native, sizeof(JsonHelper_eventChangeJsonObjectValue_Parms), &UE4CodeGen_Private::TBoolSetBitWrapper<decltype(NewProp_isSuccess_SetBit)>::SetBit, METADATA_PARAMS(nullptr, 0) };
 			static const UE4CodeGen_Private::FStructPropertyParams NewProp_value = { UE4CodeGen_Private::EPropertyClass::Struct, "value", RF_Public|RF_Transient|RF_MarkAsNative, 0x0010000000000080, 1, nullptr, STRUCT_OFFSET(JsonHelper_eventChangeJsonObjectValue_Parms, value), Z_Construct_UScriptStruct_FJsonStruct, METADATA_PARAMS(nullptr, 0) };
 			static const UE4CodeGen_Private::FStrPropertyParams NewProp_key = { UE4CodeGen_Private::EPropertyClass::Str, "key", RF_Public|RF_Transient|RF_MarkAsNative, 0x0010000000000080, 1, nullptr, STRUCT_OFFSET(JsonHelper_eventChangeJsonObjectValue_Parms, key), METADATA_PARAMS(nullptr, 0) };
 			static const UE4CodeGen_Private::FStructPropertyParams NewProp_json = { UE4CodeGen_Private::EPropertyClass::Struct, "json", RF_Public|RF_Transient|RF_MarkAsNative, 0x0010000000000080, 1, nullptr, STRUCT_OFFSET(JsonHelper_eventChangeJsonObjectValue_Parms, json), Z_Construct_UScriptStruct_FJsonStruct, METADATA_PARAMS(nullptr, 0) };
 			static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[] = {
-				(const UE4CodeGen_Private::FPropertyParamsBase*)&NewProp_ReturnValue,
+				(const UE4CodeGen_Private::FPropertyParamsBase*)&NewProp_isSuccess,
 				(const UE4CodeGen_Private::FPropertyParamsBase*)&NewProp_value,
 				(const UE4CodeGen_Private::FPropertyParamsBase*)&NewProp_key,
 				(const UE4CodeGen_Private::FPropertyParamsBase*)&NewProp_json,
@@ -379,38 +315,7 @@ static struct FScriptStruct_JsonModule_StaticRegisterNativesFJsonStruct
 				{ "ModuleRelativePath", "Public/JsonHelper.h" },
 			};
 #endif
-			static const UE4CodeGen_Private::FFunctionParams FuncParams = { (UObject*(*)())Z_Construct_UClass_UJsonHelper, "ChangeJsonObjectValue", RF_Public|RF_Transient|RF_MarkAsNative, nullptr, (EFunctionFlags)0x14042401, sizeof(JsonHelper_eventChangeJsonObjectValue_Parms), PropPointers, ARRAY_COUNT(PropPointers), 0, 0, METADATA_PARAMS(Function_MetaDataParams, ARRAY_COUNT(Function_MetaDataParams)) };
-			UE4CodeGen_Private::ConstructUFunction(ReturnFunction, FuncParams);
-		}
-		return ReturnFunction;
-	}
-	UFunction* Z_Construct_UFunction_UJsonHelper_ChangeJsonStringValue()
-	{
-		struct JsonHelper_eventChangeJsonStringValue_Parms
-		{
-			FJsonStruct json;
-			FString value;
-			FJsonStruct ReturnValue;
-		};
-		static UFunction* ReturnFunction = nullptr;
-		if (!ReturnFunction)
-		{
-			static const UE4CodeGen_Private::FStructPropertyParams NewProp_ReturnValue = { UE4CodeGen_Private::EPropertyClass::Struct, "ReturnValue", RF_Public|RF_Transient|RF_MarkAsNative, 0x0010000000000580, 1, nullptr, STRUCT_OFFSET(JsonHelper_eventChangeJsonStringValue_Parms, ReturnValue), Z_Construct_UScriptStruct_FJsonStruct, METADATA_PARAMS(nullptr, 0) };
-			static const UE4CodeGen_Private::FStrPropertyParams NewProp_value = { UE4CodeGen_Private::EPropertyClass::Str, "value", RF_Public|RF_Transient|RF_MarkAsNative, 0x0010000000000080, 1, nullptr, STRUCT_OFFSET(JsonHelper_eventChangeJsonStringValue_Parms, value), METADATA_PARAMS(nullptr, 0) };
-			static const UE4CodeGen_Private::FStructPropertyParams NewProp_json = { UE4CodeGen_Private::EPropertyClass::Struct, "json", RF_Public|RF_Transient|RF_MarkAsNative, 0x0010000000000080, 1, nullptr, STRUCT_OFFSET(JsonHelper_eventChangeJsonStringValue_Parms, json), Z_Construct_UScriptStruct_FJsonStruct, METADATA_PARAMS(nullptr, 0) };
-			static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[] = {
-				(const UE4CodeGen_Private::FPropertyParamsBase*)&NewProp_ReturnValue,
-				(const UE4CodeGen_Private::FPropertyParamsBase*)&NewProp_value,
-				(const UE4CodeGen_Private::FPropertyParamsBase*)&NewProp_json,
-			};
-#if WITH_METADATA
-			static const UE4CodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
-				{ "Category", "Json" },
-				{ "ModuleRelativePath", "Public/JsonHelper.h" },
-				{ "ToolTip", "????Json Value" },
-			};
-#endif
-			static const UE4CodeGen_Private::FFunctionParams FuncParams = { (UObject*(*)())Z_Construct_UClass_UJsonHelper, "ChangeJsonStringValue", RF_Public|RF_Transient|RF_MarkAsNative, nullptr, (EFunctionFlags)0x14042401, sizeof(JsonHelper_eventChangeJsonStringValue_Parms), PropPointers, ARRAY_COUNT(PropPointers), 0, 0, METADATA_PARAMS(Function_MetaDataParams, ARRAY_COUNT(Function_MetaDataParams)) };
+			static const UE4CodeGen_Private::FFunctionParams FuncParams = { (UObject*(*)())Z_Construct_UClass_UJsonHelper, "ChangeJsonObjectValue", RF_Public|RF_Transient|RF_MarkAsNative, nullptr, (EFunctionFlags)0x14442401, sizeof(JsonHelper_eventChangeJsonObjectValue_Parms), PropPointers, ARRAY_COUNT(PropPointers), 0, 0, METADATA_PARAMS(Function_MetaDataParams, ARRAY_COUNT(Function_MetaDataParams)) };
 			UE4CodeGen_Private::ConstructUFunction(ReturnFunction, FuncParams);
 		}
 		return ReturnFunction;
@@ -920,11 +825,8 @@ static struct FScriptStruct_JsonModule_StaticRegisterNativesFJsonStruct
 			static const FClassFunctionLinkInfo FuncInfo[] = {
 				{ &Z_Construct_UFunction_UJsonHelper_AddJsonArrayValue, "AddJsonArrayValue" }, // 1275414490
 				{ &Z_Construct_UFunction_UJsonHelper_AddJsonObjectValue, "AddJsonObjectValue" }, // 3029675952
-				{ &Z_Construct_UFunction_UJsonHelper_ChangeJsonArrayValue, "ChangeJsonArrayValue" }, // 3937872861
-				{ &Z_Construct_UFunction_UJsonHelper_ChangeJsonBoolValue, "ChangeJsonBoolValue" }, // 3850033926
-				{ &Z_Construct_UFunction_UJsonHelper_ChangeJsonNumberValue, "ChangeJsonNumberValue" }, // 265971713
-				{ &Z_Construct_UFunction_UJsonHelper_ChangeJsonObjectValue, "ChangeJsonObjectValue" }, // 2744918561
-				{ &Z_Construct_UFunction_UJsonHelper_ChangeJsonStringValue, "ChangeJsonStringValue" }, // 879861796
+				{ &Z_Construct_UFunction_UJsonHelper_ChangeJsonArrayValue, "ChangeJsonArrayValue" }, // 4281974749
+				{ &Z_Construct_UFunction_UJsonHelper_ChangeJsonObjectValue, "ChangeJsonObjectValue" }, // 1888653299
 				{ &Z_Construct_UFunction_UJsonHelper_CreateJsonArray, "CreateJsonArray" }, // 2865429746
 				{ &Z_Construct_UFunction_UJsonHelper_CreateJsonArrayByValue, "CreateJsonArrayByValue" }, // 3548686228
 				{ &Z_Construct_UFunction_UJsonHelper_CreateJsonBoolValue, "CreateJsonBoolValue" }, // 1336967343
@@ -966,7 +868,7 @@ static struct FScriptStruct_JsonModule_StaticRegisterNativesFJsonStruct
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(UJsonHelper, 2156675432);
+	IMPLEMENT_CLASS(UJsonHelper, 2018581575);
 	static FCompiledInDefer Z_CompiledInDefer_UClass_UJsonHelper(Z_Construct_UClass_UJsonHelper, &UJsonHelper::StaticClass, TEXT("/Script/JsonModule"), TEXT("UJsonHelper"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(UJsonHelper);
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
