@@ -53,72 +53,6 @@ namespace MyTools {
 		TSharedRef< TJsonReader<TCHAR> > JsonReader = TJsonReaderFactory<TCHAR>::Create(json);
 		return FJsonSerializer::Deserialize(JsonReader, jsonValue);
 	}
-	/*从JsonObject中通过Key获取Value*/
-	static bool JsonGetValueByKey(FJsonObject * temObject, FString key, TSharedPtr<FJsonValue>& value) {
-		auto tem = temObject->TryGetField(key);
-		if (!tem.IsValid())return false;
-		value = tem;
-		return true;
-	}
-	/*获取JsonValue值*/
-	static FString ParseJsonValueSingle(TSharedPtr<FJsonValue> jsonValue) {
-		switch (jsonValue->Type) {
-		case EJson::String:
-			return jsonValue->AsString();
-			break;
-		case EJson::Number:
-			return FString::SanitizeFloat(jsonValue->AsNumber());
-			break;
-		case EJson::Boolean:
-			return jsonValue->AsBool() ? TEXT("true") : TEXT("false");
-		}
-		return FString();
-	}
-	/*获取JsonObject中所有的key-value*/
-	static TMap<FString, FString> ParseJsonObject(const TSharedPtr<FJsonValue>& object) {
-		if (!object.IsValid())return TMap<FString, FString>();
-		TMap<FString, FString> out;
-		switch (object->Type)
-		{
-		case EJson::Object:
-		{
-			for (auto tem : object->AsObject()->Values) {
-				switch (tem.Value->Type)
-				{
-				case EJson::String:
-					out.Add(tem.Key, ParseJsonValueSingle(tem.Value));
-					break;
-				case EJson::Number:
-					out.Add(tem.Key, ParseJsonValueSingle(tem.Value));
-					break;
-				case EJson::Boolean:
-					out.Add(tem.Key, ParseJsonValueSingle(tem.Value));
-				case EJson::Object:
-					out.Append(ParseJsonObject(tem.Value));
-					break;
-				case EJson::Array:
-					out.Append(ParseJsonObject(tem.Value));
-					break;
-				default:
-					break;
-				}
-			}
-			break;
-		}
-		case EJson::Array:
-		{
-			auto temArray=object->AsArray();
-			for (auto tem : temArray) {
-				out.Append(ParseJsonObject(tem));
-			}
-			break;
-		}
-		default:
-			break;
-		}
-	
-		return out;
-	}
 	/*生成Json*/
 	static FString CreateJson(const TSharedPtr<FJsonObject>& jsonValue) {
 		FString out;
@@ -131,6 +65,26 @@ namespace MyTools {
 		auto tem = TJsonWriterFactory<>::Create(&out);
 		FJsonSerializer::Serialize(arrays, tem);
 		return out;
+	}
+	/*获取JsonValue值*/
+	static FString ParseJsonValueSingle(TSharedPtr<FJsonValue> jsonValue) {
+		switch (jsonValue->Type) {
+		case EJson::String:
+			return jsonValue->AsString();
+			break;
+		case EJson::Number:
+			return FString::SanitizeFloat(jsonValue->AsNumber());
+			break;
+		case EJson::Boolean:
+			return jsonValue->AsBool() ? TEXT("true") : TEXT("false");
+		case EJson::Array:
+			return CreateJson(jsonValue->AsArray());
+			break;
+		case EJson::Object:
+			return CreateJson(jsonValue->AsObject());
+			break;
+		}
+		return FString();
 	}
 }
 #endif // !STRINGTOOLS_H

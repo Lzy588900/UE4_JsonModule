@@ -22,6 +22,15 @@ enum class EJsonType : uint8;
 
 #define MyPackageProject_Plugins_JsonModule_Source_JsonModule_Public_JsonHelper_h_34_RPC_WRAPPERS \
  \
+	DECLARE_FUNCTION(execJsonObjectToKeyValuePairs) \
+	{ \
+		P_GET_STRUCT(FJsonStruct,Z_Param_json); \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		*(FString*)Z_Param__Result=UJsonHelper::JsonObjectToKeyValuePairs(Z_Param_json); \
+		P_NATIVE_END; \
+	} \
+ \
 	DECLARE_FUNCTION(execCreateJsonArrayByValue) \
 	{ \
 		P_GET_TARRAY(FJsonStruct,Z_Param_arrays); \
@@ -169,12 +178,11 @@ enum class EJsonType : uint8;
 	{ \
 		P_GET_STRUCT(FJsonStruct,Z_Param_json); \
 		P_GET_PROPERTY(UStrProperty,Z_Param_key); \
-		P_GET_PROPERTY(UStrProperty,Z_Param_value); \
 		P_GET_ENUM(EJsonType,Z_Param_type); \
 		P_GET_UBOOL_REF(Z_Param_Out_isFound); \
 		P_FINISH; \
 		P_NATIVE_BEGIN; \
-		*(FJsonStruct*)Z_Param__Result=UJsonHelper::FindJsonFromObject(Z_Param_json,Z_Param_key,Z_Param_value,EJsonType(Z_Param_type),Z_Param_Out_isFound); \
+		*(FJsonStruct*)Z_Param__Result=UJsonHelper::FindJsonFromObject(Z_Param_json,Z_Param_key,EJsonType(Z_Param_type),Z_Param_Out_isFound); \
 		P_NATIVE_END; \
 	} \
  \
@@ -226,6 +234,15 @@ enum class EJsonType : uint8;
 
 #define MyPackageProject_Plugins_JsonModule_Source_JsonModule_Public_JsonHelper_h_34_RPC_WRAPPERS_NO_PURE_DECLS \
  \
+	DECLARE_FUNCTION(execJsonObjectToKeyValuePairs) \
+	{ \
+		P_GET_STRUCT(FJsonStruct,Z_Param_json); \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		*(FString*)Z_Param__Result=UJsonHelper::JsonObjectToKeyValuePairs(Z_Param_json); \
+		P_NATIVE_END; \
+	} \
+ \
 	DECLARE_FUNCTION(execCreateJsonArrayByValue) \
 	{ \
 		P_GET_TARRAY(FJsonStruct,Z_Param_arrays); \
@@ -373,12 +390,11 @@ enum class EJsonType : uint8;
 	{ \
 		P_GET_STRUCT(FJsonStruct,Z_Param_json); \
 		P_GET_PROPERTY(UStrProperty,Z_Param_key); \
-		P_GET_PROPERTY(UStrProperty,Z_Param_value); \
 		P_GET_ENUM(EJsonType,Z_Param_type); \
 		P_GET_UBOOL_REF(Z_Param_Out_isFound); \
 		P_FINISH; \
 		P_NATIVE_BEGIN; \
-		*(FJsonStruct*)Z_Param__Result=UJsonHelper::FindJsonFromObject(Z_Param_json,Z_Param_key,Z_Param_value,EJsonType(Z_Param_type),Z_Param_Out_isFound); \
+		*(FJsonStruct*)Z_Param__Result=UJsonHelper::FindJsonFromObject(Z_Param_json,Z_Param_key,EJsonType(Z_Param_type),Z_Param_Out_isFound); \
 		P_NATIVE_END; \
 	} \
  \

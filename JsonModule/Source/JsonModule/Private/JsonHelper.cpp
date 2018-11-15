@@ -71,12 +71,12 @@ TArray<FJsonStruct> UJsonHelper::GetAllValueFromJson(FJsonStruct json)
 	return out;
 }
 
-FJsonStruct UJsonHelper::FindJsonFromObject(FJsonStruct json, FString key, FString value, EJsonType type,bool& isFound)
+FJsonStruct UJsonHelper::FindJsonFromObject(FJsonStruct json, FString key,EJsonType type,bool& isFound)
 {
 	isFound = false;
 	FJsonStruct out;
 	TSharedPtr<FJsonValue> result;
-	if (FindJsonFromObject_C(json.value, key, value,(EJson)type,result)) {
+	if (FindJsonFromObject_C(json.value, key,(EJson)type,result)) {
 		isFound = true;
 		out.key = key;
 		out.value = result;
@@ -84,13 +84,13 @@ FJsonStruct UJsonHelper::FindJsonFromObject(FJsonStruct json, FString key, FStri
 	return out;
 }
 
-bool UJsonHelper::FindJsonFromObject_C(TSharedPtr<FJsonValue> json, FString key, FString value, EJson type,TSharedPtr<FJsonValue>& result)
+bool UJsonHelper::FindJsonFromObject_C(TSharedPtr<FJsonValue> json, FString key,EJson type,TSharedPtr<FJsonValue>& result)
 {
 	if (!json.IsValid() || (json->Type != EJson::Object&&json->Type != EJson::Array))	return false;
 	if (json->Type == EJson::Array) {
 		auto temArray = json->AsArray();
 		for (auto tem : temArray) {
-			if (FindJsonFromObject_C(tem, key, value, type, result))return true;
+			if (FindJsonFromObject_C(tem, key,type, result))return true;
 		}
 		return false;
 	}
@@ -100,7 +100,7 @@ bool UJsonHelper::FindJsonFromObject_C(TSharedPtr<FJsonValue> json, FString key,
 		case EJson::None:case EJson::Null:return false; break;
 		case EJson::String: {
 			auto tem = json->AsObject()->GetField<EJson::String>(key);
-			if (tem.IsValid() && tem->AsString().Equals(value)) {
+			if (tem.IsValid()) {
 				result = tem;
 				return true;
 			}
@@ -109,7 +109,7 @@ bool UJsonHelper::FindJsonFromObject_C(TSharedPtr<FJsonValue> json, FString key,
 		}
 		case EJson::Number: {
 			auto tem = json->AsObject()->GetField<EJson::String>(key);
-			if (tem.IsValid() && tem->AsNumber() == FCString::Atof(*value)) {
+			if (tem.IsValid()) {
 				result = tem;
 				return true;
 			}
@@ -118,7 +118,7 @@ bool UJsonHelper::FindJsonFromObject_C(TSharedPtr<FJsonValue> json, FString key,
 		}
 		case EJson::Boolean: {
 			auto tem = json->AsObject()->GetField<EJson::String>(key);
-			if (tem.IsValid() && value.Equals(tem->AsBool() ? "true" : "false")) {
+			if (tem.IsValid()) {
 				result = tem;
 				return true;
 			}
@@ -326,4 +326,16 @@ void UJsonHelper::CreateJsonArrayValue_C(TArray<TSharedPtr<FJsonValue>>& ary, FJ
 		ary.Add(addItem.value);
 		break;
 	}
+}
+
+FString UJsonHelper::JsonObjectToKeyValuePairs(FJsonStruct json)
+{
+	FString out;
+	if (!json.value.IsValid() || json.value->Type != EJson::Object)return out;
+	auto object=json.value->AsObject();
+	for (auto tem : object->Values) {
+		out+=tem.Key+ TEXT("=")+MyTools::ParseJsonValueSingle(tem.Value)+TEXT("&");
+	}
+	out.RemoveFromEnd(TEXT("&"));
+	return out;
 }
